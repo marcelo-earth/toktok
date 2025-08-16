@@ -27,6 +27,20 @@ python download_data.py
 python train_tokenizer.py --vocab-size 32000
 ```
 
+## Upload to HuggingFace
+
+```bash
+export HF_TOKEN=your_token
+python upload_to_hf.py --model models/sp_bpe_32k --repo username/toktok-es-32k
+```
+
+## Key findings
+
+- English tokenizers (GPT-4, Llama) use 20-40% more tokens on spanish text
+- 32K vocab is the sweet spot for spanish (diminishing returns after that)
+- Our tokenizer follows Zipf's law, meaning the vocab distribution is healthy
+- Llama 3 handles spanish better than GPT-4 thanks to more multilingual training data
+
 ## Results
 
 See `toktok.ipynb` for the full comparison and visualizations.
