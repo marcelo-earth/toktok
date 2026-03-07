@@ -54,4 +54,16 @@ python upload_to_hf.py --model models/sp_bpe_32k --repo username/toktok-es-32k
 
 ## Results
 
+### Compression comparison
+
+![Compression comparison](plots/compression_comparison.png)
+
+### Zipf's law
+
+![Zipf's law](plots/zipf.png)
+
+### Vocab sweet spot
+
+![Vocab sweet spot](plots/vocab_sweet_spot.png)
+
 See `toktok.ipynb` for the full comparison and visualizations.
