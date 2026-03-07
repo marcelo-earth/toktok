@@ -23,16 +23,17 @@
 
 ## Why?
 
-Most LLM tokenizers (GPT-4, Llama) were trained on English-heavy data. On Spanish text, they produce **20-40% more tokens** than necessary — making inference slower and more expensive.
+Most LLM tokenizers (GPT-4, Llama) were trained on English-heavy data. On Spanish text, they produce more tokens than necessary — making inference slower and more expensive. But how much more, and what's the real tradeoff?
 
-TokTok trains a BPE tokenizer specifically for Spanish and benchmarks it against GPT-4 (`tiktoken`) and Llama 3 tokenizers across multiple vocabulary sizes.
+TokTok trains a BPE tokenizer specifically for Spanish and honestly benchmarks it against GPT-4 (`tiktoken`) and Llama 3 tokenizers — including measuring what you **lose** on English by going language-specific.
 
 ## Key Findings
 
-- **20-40% fewer tokens** on Spanish text compared to GPT-4 and Llama tokenizers
+- **More efficient per vocab entry** — toktok_32k achieves better Spanish compression than GPT-4 (100K vocab) with 3x fewer entries
 - **32K vocab is the sweet spot** — diminishing returns beyond that for Spanish
-- **Healthy vocab distribution** — token frequencies follow Zipf's law
+- **The tradeoff is real** — our tokenizer is worse on English (by design). Worth it for Spanish-heavy workloads, not for multilingual ones
 - **Llama 3 > GPT-4 for Spanish** — thanks to more multilingual training data
+- **Healthy vocab distribution** — token frequencies follow Zipf's law
 
 ## Pre-trained Models
 
@@ -93,9 +94,21 @@ Open `toktok.ipynb` to reproduce all comparisons and plots.
 
 ### Compression Comparison
 
-How many tokens each tokenizer needs for the same Spanish text (fewer is better):
+How many tokens each tokenizer needs for the same Spanish text (fewer is better). **Caveat**: our tokenizer spends its entire vocab budget on Spanish, while GPT-4 (100K) and Llama 3 (128K) cover all languages + code — so raw compression isn't apples-to-apples:
 
 ![Compression comparison](plots/compression_comparison.png)
+
+### Normalized Efficiency
+
+To make the comparison fair, we normalize by vocab size — compression per 1K vocab entries. This shows who uses their vocab budget more efficiently:
+
+![Normalized efficiency](plots/normalized_efficiency.png)
+
+### The Tradeoff: English Degradation
+
+What you gain on Spanish, you lose on English. This is the honest cost of a language-specific tokenizer:
+
+![Tradeoff](plots/tradeoff.png)
 
 ### Zipf's Law
 
