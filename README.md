@@ -1,6 +1,17 @@
-# TokTok
+<p align="center">
+  <img
+    src=".github/logo.png"
+    align="center"
+    width="100"
+    alt="TokTok"
+    title="TokTok"
+  />
+  <h1 align="center">TokTok</h1>
+</p>
 
-Train a custom BPE tokenizer from scratch on a Spanish corpus using SentencePiece.
+<p align="center">
+  📊 Train a custom BPE tokenizer from scratch on a Spanish corpus using SentencePiece. 📖
+</p>
 
 ## What is this?
 
