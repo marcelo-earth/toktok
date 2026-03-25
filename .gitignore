@@ -7,7 +7,4 @@ build/
 .env
 .venv/
 venv/
-*.model
-*.vocab
 data/
-models/
