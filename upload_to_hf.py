@@ -3,7 +3,6 @@
 import os
 import argparse
 import sentencepiece as spm
-from tokenizers import SentencePieceBPETokenizer
 from huggingface_hub import HfApi, create_repo
 
 
