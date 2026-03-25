@@ -28,11 +28,8 @@ def upload_tokenizer(model_path, repo_name, token=None):
 
     api = HfApi(token=token)
 
-    # create repo if it doesnt exist
-    try:
-        create_repo(repo_name, token=token, repo_type="model", exist_ok=True)
-    except Exception as e:
-        print(f"Repo creation: {e}")
+    # create repo if it doesn't exist
+    create_repo(repo_name, token=token, repo_type="model", exist_ok=True)
 
     # upload files
     api.upload_file(path_or_fileobj=model_file, path_in_repo="tokenizer.model", repo_id=repo_name)
